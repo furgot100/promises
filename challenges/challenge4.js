@@ -8,6 +8,8 @@
  *    block #1 and run the code. What happens? (HINT: You may need to run
  *    `npm init` first.)
  * 
+ *     says Luke Skywalker
+ * 
  * 
  * 2. Sometimes, when making API calls, we want to make a bunch of calls in
  *    parallel and don't care in what order they resolve. (In other words, they
@@ -15,7 +17,7 @@
  * 
  *    Uncomment code block #2 and run the code. What happens? What advantages 
  *    does `Promise.all` give us when dealing with promises?
- * 
+ *     runs all promises together so Luke Skywalker, C-3PO, R2-D2
  * 
  * 3. Make another variable `planet1Promise` and assign to it the result of
  *    calling `makePromise` with the URL `https://swapi.co/api/planets/1`.
@@ -55,23 +57,24 @@ function makePromise(url) {
 const person1Promise = makePromise('https://swapi.co/api/people/1')
 const person2Promise = makePromise('https://swapi.co/api/people/2')
 const person3Promise = makePromise('https://swapi.co/api/people/3')
+const planet1Promise = makePromise('https://swapi.co/api/planets/1')
 
 /* Uncomment me! #1 */
-// person1Promise.then(function(personResult) {
-//     console.log(`Resulting person's name: ${personResult.name}`);
-// }).catch(function(err) {
-//     console.log("Got an error!")
-//     console.log(err);
-// });
+person1Promise.then(function(personResult) {
+    console.log(`Resulting person's name: ${personResult.name}`);
+}).catch(function(err) {
+    console.log("Got an error!")
+    console.log(err);
+});
 
 /* Uncomment me! #2 */
-// Promise.all([person1Promise, person2Promise, person3Promise])
-//     .then(function(results) {
-//         for (let i = 0; i < 3; i++) {
-//             console.log(`Person ${i+1}'s name: ${results[i].name}`)
-//         }
-//     })
-//     .catch(function(err) {
-//         console.log('Got an error!')
-//         console.log(err)
-//     })
+Promise.all([person1Promise, person2Promise, person3Promise])
+    .then(function(results) {
+        for (let i = 0; i < 3; i++) {
+            console.log(`Person ${i+1}'s name: ${results[i].name}`)
+        }
+    })
+    .catch(function(err) {
+        console.log('Got an error!')
+        console.log(err)
+    })
